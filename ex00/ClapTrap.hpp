@@ -12,11 +12,11 @@ public:
 	~ClapTrap();
 
 	ClapTrap(const std::string &name);
+	ClapTrap(const std::string& name, const int& hit_point, const int& energy_point, const int& attack_damage);
 
 	void attack(const std::string &target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	const std::string getName(void) const;
 
 private:
 	std::string m_name;
