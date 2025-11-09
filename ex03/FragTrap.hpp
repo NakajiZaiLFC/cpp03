@@ -2,7 +2,7 @@
 #define FragTrap_HPP
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap{
+class FragTrap : public virtual ClapTrap{
 public:
     FragTrap();
     FragTrap(const FragTrap& other);
