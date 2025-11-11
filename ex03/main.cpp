@@ -1,74 +1,102 @@
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
-
-// Helper function to print clean section headers
-void print_header(const std::string& title)
-{
-    std::cout << "\n--- " << title << " ---" << std::endl;
-}
 
 int main()
 {
-    // --- 1. Testing Default Values & High Fives ---
-    print_header("1. Testing Default Values & High Fives");
-    
-    // Test name constructor and default FragTrap values
-    FragTrap f_default("Fraggy");
-    
-    // Test attack (should use AD: 30 as per ex02)
-    std::cout << "* Fraggy attacks (should have 30 AD) *" << std::endl;
-    f_default.attack("a Training Dummy"); 
-    
-    // Test unique ability
-    std::cout << "* Fraggy requests a high five *" << std::endl;
-    f_default.highFivesGuys();
-    
+    std::cout << "--- 1. 引数付きコンストラクタ、whoAmI、attack、継承関数のテスト ---" << std::endl;
+    {
+        // 引数付きコンストラクタ
+        DiamondTrap dt1("Hero");
+        std::cout << std::endl;
 
-    // --- 2. Testing Custom Constructor & Inherited Functions ---
-    print_header("2. Testing Custom Constructor & Inherited Functions");
-    
-    // Create a custom FragTrap with low EP
-    FragTrap f_custom("CustomFrag", 20, 3, 10); // HP:20, EP:3, AD:10
+        // whoAmI: 
+        // DiamondTrap::name ("Hero") と 
+        // ClapTrap::m_name ("Hero_clap_name") が正しく設定されているか確認
+        std::cout << "[Test: whoAmI]" << std::endl;
+        dt1.whoAmI();
+        std::cout << std::endl;
 
-    std::cout << "* CustomFrag's turn... *" << std::endl;
-    f_custom.attack("Target 1"); // EP: 3 -> 2
-    f_custom.beRepaired(5);      // EP: 2 -> 1, HP: 20 -> 25
-    f_custom.takeDamage(5);      // HP: 25 -> 20
-    f_custom.attack("Target 2"); // EP: 1 -> 0
+        // attack: ScavTrap::attack が呼び出されるか確認
+        std::cout << "[Test: attack (ScavTrap::attack)]" << std::endl;
+        dt1.attack("Enemy");
+        std::cout << std::endl;
 
-    // --- 3. Testing Exhaustion & "Dead" States ---
-    print_header("3. Testing Exhaustion & \"Dead\" States");
-    
-    std::cout << "* CustomFrag is out of energy (EP: 0) *" << std::endl;
-    f_custom.attack("Target 3"); // Fails (No EP)
-    f_custom.beRepaired(1);      // Fails (No EP)
+        // 継承された固有関数の呼び出しテスト
+        // (DiamondTrap が FragTrap かつ ScavTrap であることの確認)
+        std::cout << "[Test: 継承された関数]" << std::endl;
+        dt1.highFivesGuys(); // FragTrapから継承
+        dt1.guardGate();     // ScavTrapから継承
+        std::cout << std::endl;
 
-    std::cout << "\n* Testing a \"Dead\" FragTrap *" << std::endl;
-    FragTrap f_dead("DeadFrag", 0, 10, 10); // HP: 0
-    f_dead.attack("Target 4"); // Fails (No HP)
-    f_dead.beRepaired(1);      // Fails (No HP)
+    } // dt1のデストラクタが呼ばれる
+    std::cout << "---------------------------------------------------------" << std::endl << std::endl;
 
 
-    // --- 4. Testing Orthodox Canonical Form (Copy) ---
-    print_header("4. Testing Orthodox Canonical Form (Copy)");
+    std::cout << "--- 2. デフォルトコンストラクタのテスト ---" << std::endl;
+    {
+        // デフォルトコンストラクタ
+        DiamondTrap dt_default;
+        std::cout << std::endl;
+        
+        // whoAmI: 
+        // DiamondTrap::name ("Human") と 
+        // ClapTrap::m_name (ClapTrapのデフォルトコンストラクタで設定された名前) を確認
+        std::cout << "[Test: whoAmI (Default)]" << std::endl;
+        dt_default.whoAmI();
+        std::cout << std::endl;
     
-    std::cout << "\n* Testing Copy Constructor *" << std::endl;
-    // Copy f_custom (which has EP: 0)
-    FragTrap f_copy(f_custom);
-    std::cout << "* Copied FragTrap tries to attack (should fail) *" << std::endl;
-    f_copy.attack("Copy's Target"); // Fails (EP should be 0)
+    } // dt_defaultのデストラクタが呼ばれる
+    std::cout << "---------------------------------------" << std::endl << std::endl;
+
+
+    std::cout << "--- 3. コピーコンストラクタのテスト ---" << std::endl;
+    {
+        DiamondTrap dt_orig("Original");
+        std::cout << std::endl;
+
+        std::cout << "[Test: コピーを作成]" << std::endl;
+        // コピーコンストラクタ
+        DiamondTrap dt_copy(dt_orig); 
+        std::cout << std::endl;
+
+        // コピーがオリジナルと同じ名前 (DiamondTrap::name と ClapTrap::m_name) を持つか確認
+        std::cout << "[Test: whoAmI (Copy)]" << std::endl;
+        dt_copy.whoAmI(); // "Original" と "Original_clap_name" のはず
+        std::cout << std::endl;
+
+        // オリジナルが変更されていないことを確認
+        std::cout << "[Test: whoAmI (Original)]" << std::endl;
+        dt_orig.whoAmI();
+        std::cout << std::endl;
+    
+    } // dt_copy, dt_orig のデストラクタが呼ばれる
+    std::cout << "-------------------------------------" << std::endl << std::endl;
+
+
+    std::cout << "--- 4. 代入演算子のテスト ---" << std::endl;
+    {
+        DiamondTrap dt_assigner("Assigner");
+        DiamondTrap dt_receiver("Receiver");
+        std::cout << std::endl;
+
+        std::cout << "[Test: 代入前のReceiver]" << std::endl;
+        dt_receiver.whoAmI(); // "Receiver" と "Receiver_clap_name"
+        std::cout << std::endl;
+
+        std::cout << "[Test: 代入実行]" << std::endl;
+        // 代入演算子
+        dt_receiver = dt_assigner; 
+        std::cout << std::endl;
+
+        // ReceiverがAssignerの (ClapTrap::m_name と DiamondTrap::name) を持っているか確認
+        std::cout << "[Test: 代入後のReceiver]" << std::endl;
+        dt_receiver.whoAmI(); // "Assigner" と "Assigner_clap_name" のはず
+        std::cout << std::endl;
+
+    } // dt_receiver, dt_assigner のデストラクタが呼ばれる
+    std::cout << "---------------------------------" << std::endl << std::endl;
 
     
-    std::cout << "\n* Testing Copy Assignment Operator *" << std::endl;
-    FragTrap f_assign("Assigner");
-    f_assign = f_custom; // Assign f_custom (EP: 0) to f_assign
-    
-    std::cout << "* Assigned FragTrap tries to attack (should fail) *" << std::endl;
-    f_assign.attack("Assigner's Target"); // Fails (EP should be 0)
-
-    
-    // --- 5. End of main (Destructors) ---
-    print_header("5. End of main (Destructors will be called)");
-    
-    return 0; // All destructors are called here in reverse order of creation
+    std::cout << "--- すべてのテストが完了しました ---" << std::endl;
+    return 0;
 }

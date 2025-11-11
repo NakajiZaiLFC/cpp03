@@ -1,9 +1,11 @@
-NAME := fragTrap
+NAME := diamondTrap
 CXX := c++
 CXXFLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 FILE := main.cpp \
 		ClapTrap.cpp \
-		FragTrap.cpp
+		FragTrap.cpp \
+		ScavTrap.cpp \
+		DiamondTrap.cpp
 OBJDIR := obj
 
 OBJ := $(addprefix $(OBJDIR)/, $(FILE:.cpp=.o))

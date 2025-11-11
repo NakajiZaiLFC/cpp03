@@ -14,9 +14,10 @@ public:
 	DiamondTrap(const std::string& name);
 
 	void whoAmI(void);
+	void attack(const std::string &target);
 
 private:
-	std::string name;
+	std::string m_name;
     
 };
 
