@@ -6,7 +6,7 @@ ScavTrap::ScavTrap() : ClapTrap("Human")
 	this->m_hit_point = 100;
 	this->m_energy_point = 50;
 	this->m_attack_damage = 20;
-	std::cout << "🫡  ScavTrap " << m_name << " Constructed." << std::endl;
+	std::cout << "🫡  ScavTrap " << this->m_name << " Constructed." << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
@@ -14,7 +14,7 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 	this->m_hit_point = 100;
 	this->m_energy_point = 50;
 	this->m_attack_damage = 20;
-	std::cout << "🫡  ScavTrap " << m_name << " Constructed." << std::endl;
+	std::cout << "🫡  ScavTrap " << this->m_name << " Constructed." << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name, 
@@ -26,14 +26,14 @@ ScavTrap::ScavTrap(const std::string& name,
 	this->m_hit_point = hit_point;
 	this->m_energy_point = energy_point;
 	this->m_attack_damage = attack_damage;
-	std::cout << "🫡  ScavTrap " << m_name << " Constructed." << std::endl;
+	std::cout << "🫡  ScavTrap " << this->m_name << " Constructed." << std::endl;
 }
 
 	
 
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
-	std::cout << "🫡  ScavTrap " << m_name << " Copy Constructed." << std::endl;
+	std::cout << "🫡  ScavTrap " << this->m_name << " Copy Constructed." << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
@@ -47,7 +47,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "👋 ScavTrap " << m_name << " Destructed." << std::endl;
+    std::cout << "👋 ScavTrap " << this->m_name << " Destructed." << std::endl;
 }
 
 void ScavTrap::guardGate()
@@ -62,7 +62,7 @@ void ScavTrap::attack(const std::string& target)
 		std::cout << "❌ ScavTrap " << this->m_name << " cannot attack to " << target << "." << std::endl;
 		std::cout << m_name << "😵 \"Need more energy point...☕\"" << std::endl;
 	}
-	else if (m_hit_point < 1)
+	else if (this->m_hit_point < 1)
 	{
 		std::cout << "❌ ScavTrap " << this->m_name << " cannot attack to " << target << "." << std::endl;
 		std::cout << m_name << "😵 \"Need more HP...🛌\"" << std::endl;

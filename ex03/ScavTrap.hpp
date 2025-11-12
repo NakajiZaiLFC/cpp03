@@ -13,8 +13,6 @@ public:
 	ScavTrap(const std::string& name, const int& hit_point, const int& energy_point, const int& attack_damage);
 	void guardGate();
 	void attack(const std::string& target);
-private:
-    
 };
 
 #endif

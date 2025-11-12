@@ -25,6 +25,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 		ClapTrap::operator=(other);
 		this->m_name = other.m_name;
 	}
+	std::cout << "➡️  DiamondTrap " << this->m_name << " Copy Assignment Operator called." << std::endl;
 	return *this;
 }
 
@@ -39,9 +40,9 @@ DiamondTrap::DiamondTrap(const std::string &name)
 	  ScavTrap(),
 	  m_name(name)
 {
-	this->m_hit_point = 100;
-	this->m_energy_point = 50;
-	this->m_attack_damage = 30;
+	this->m_hit_point = FragTrap::m_hit_point;
+	this->m_energy_point = ScavTrap::m_energy_point;
+	this->m_attack_damage = FragTrap::m_attack_damage;
 }
 
 void DiamondTrap::attack(const std::string &target)
