@@ -5,8 +5,7 @@ UPPER_NAME=$(echo $CLASS_NAME | tr '[:lower:]' '[:upper:]')
 
 # ヘッダーファイル生成
 cat > ${CLASS_NAME}.hpp << EOF
-#ifndef ${UPPER_NAME}_HPP
-#define ${UPPER_NAME}_HPP
+#pragma once
 
 class ${CLASS_NAME} {
 public:
@@ -19,7 +18,6 @@ private:
     
 };
 
-#endif
 EOF
 
 # 実装ファイル生成

@@ -20,9 +20,9 @@ public:
 
 protected:
 	std::string m_name;
-	int m_hit_point;
-	int m_energy_point;
-	int m_attack_damage;
+	unsigned int m_hit_point;
+	unsigned int m_energy_point;
+	unsigned int m_attack_damage;
 };
 
 #endif

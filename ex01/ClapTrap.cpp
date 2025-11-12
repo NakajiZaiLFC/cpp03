@@ -114,7 +114,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	else
 	{
 		std::cout << "✅ ClapTrap " << m_name << " takes " << amount << " points of damage!😭" << std::endl;
-		if (amount > static_cast<unsigned int>(m_hit_point))
+		if (amount > m_hit_point)
 			m_hit_point = 0;
 		else
 			m_hit_point -= amount;

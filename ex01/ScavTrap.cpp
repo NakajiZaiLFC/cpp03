@@ -47,7 +47,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "👋 ScavTrap " << m_name << " Destructed." << std::endl;
+    std::cout << "👋 ScavTrap " << this->m_name << " Destructed." << std::endl;
 }
 
 void ScavTrap::guardGate()
@@ -62,7 +62,7 @@ void ScavTrap::attack(const std::string& target)
 		std::cout << "❌ ScavTrap " << this->m_name << " cannot attack to " << target << "." << std::endl;
 		std::cout << m_name << "😵 \"Need more energy point...☕\"" << std::endl;
 	}
-	else if (m_hit_point < 1)
+	else if (this->m_hit_point < 1)
 	{
 		std::cout << "❌ ScavTrap " << this->m_name << " cannot attack to " << target << "." << std::endl;
 		std::cout << m_name << "😵 \"Need more HP...🛌\"" << std::endl;
